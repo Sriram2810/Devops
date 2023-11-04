@@ -1,0 +1,24 @@
+#!/bin/bash
+
+
+#######
+# Author : Sriram
+# Date: 4 Nov 23
+
+# This code is used to track the resource usage of the current aws account
+
+# s3 buckets
+echo "Print s3 buckets usage"
+aws s3 ls
+
+echo "Print ec2 instances usage"
+aws ec2 describe-instances
+
+echo "Print lambda functions"
+aws lambda list-functions
+
+echo "Print iam users"
+aws iam list=users
+
+#jq parsing to get the instance ids alone
+aws ec2 describe-instances | jq '.Reservations[].Instances[].Instanceid'
